@@ -1,0 +1,561 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!--Link Library leaflet-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin="" />
+
+   <!-- W3 CSS template -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin="">
+  </script>
+
+<style>
+  #mapid{
+    height: 800px;
+  }
+</style>
+
+  <title>Tourist map</title>
+</head>
+<body>
+
+<!--ทำหัวข้อ-->
+  <h1><center>
+      <font size ="+10">
+        <b>
+          <font face ="Peach Play"> ✨Welcome to Lopburi✨</font>
+        </b>
+      </font>
+    </center>
+  </h1>
+
+    <h3><center>
+          <font face = "Peach Play">สถานที่ท่องเที่ยวในจังหวัดลพบุรีขอให้ทุกคนท่องเที่ยวอย่างมีความสุข
+          </font>
+      </center></h3>
+  <h4><center><font face = "Peach Play">By Jiranuch Sornpinij</font></center></h4>
+
+<!-- แบ่งหน้าจอ -->
+    <font face = "Peach Play">
+        <div class="w3-row">
+              <div id="mapid" class="w3-half"></div>
+              <div id="content" class="w3-half">
+                  <table class="w3-table w3-striped">
+                      <tr>
+                          <th>ชื่อแหล่งท่องเที่ยว</th>
+                          <th>ประเภท</th>
+                          <th>ระดับ</th>
+                      </tr>
+                      <tr>
+                          <td>น้ำตก A</td>
+                          <td>ธรรมชาติ</td>
+                          <td>A</td>
+                      </tr>
+                  </table>
+              </div>
+          </div>
+  </font>
+<!-- เรียกแผนที่ขึ้นมาแสดง -->
+<script>
+//เรียกแผนที่
+  var map = L.map("mapid").setView([15.0827316716058,100.9149169921875],9);
+//based map1
+  var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+//based map2
+  var gsat = L.tileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}").addTo(map);
+//group layers (1+2)
+  var baseMaps ={
+//ชื่อชั้นข้อมูล:ตัวแปร
+  OSM:osm,
+  GoogleSat:gsat
+};
+
+//add data
+var tourpoint = {
+type: "FeatureCollection",
+name: "tour_plk",
+crs: {
+type: "name",
+properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
+},
+features: [
+{
+type: "Feature",
+properties: {
+Name: "พระปรางค์สามยอด",
+Type: "โบราณสถาน",
+FID_1: 1358.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.614247, 14.802639]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "พระนารายณ์ราชนิเวศน์",
+Type: "พิพิธภัณฑ์",
+FID_1: 1357.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopbori",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.611831, 14.800281]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "รถไฟลอยน้ำ เขื่อนป่าสักชลสิทธิ์",
+Type: "กิจกรรมพิเศษ",
+FID_1: 1364.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.022533, 14.992906]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "น้ำตกวังก้านเหลือง",
+Type: "น้ำตก",
+FID_1: 1359.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.112481, 15.112492]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "บ้านวิชาเยนทร์",
+Type: "สถานที่สำคัญทางประวัติศาสตร์",
+FID_1: 1370.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint", coordinates: [[100.610347, 14.803011]]},
+},
+{
+type: "Feature",
+properties: {
+Name: "เขาวงพระจันทร์",
+Type: "กิจกรรมพิเศษ",
+FID_1: 1362.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.697306, 14.9669]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "ทุ่งทานตะวัน เขาจีนแล",
+Type: "ธรรมชาติ",
+FID_1: 1355.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.749703, 14.814122]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "จุดชมวิวเขาพระยาเดินธง",
+Type: "จุดชมวิว",
+FID_1: 733.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.984514, 14.932117]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "วัดถ้ำเขาปรางค์",
+Type: "วัด",
+FID_1: 1365.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.112061, 15.259622]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "วัดเกริ่นกฐิน",
+Type: "วัด",
+FID_1: 603.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.524425, 14.971464]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "สวนสัตว์ลพบุรี",
+Type: "สวนสัตว์",
+FID_1: 611.0,
+CHANGWAT: "ลพบุรี",
+PROVINCE_1: "Lopburi",
+REGION: "ภาคกลาง",
+level: "⭐⭐⭐",
+},
+geometry: { type: "MultiPoint", coordinates: [[100.636661, 14.801792]] },
+},
+],
+};
+
+//add marker and popup
+var tourLayer = L.geoJSON(tourpoint, {
+pointToLayer: function (feature, latlng) {
+return L.marker(latlng).bindPopup(feature.properties.Name);
+},
+onEachFeature: function (feature, layer) {
+layer.on("mouseover", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.add("w3-red");
+});
+
+ layer.on("mouseout", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.remove("w3-red");
+});
+},
+}).addTo(map);
+
+//link table with popup and marker
+var cont = "";
+cont += "<table class='w3-table w3-striped'>";
+cont += "<tr>";
+cont += "<th>ชื่อแหล่งท่องเที่ยว</th>";
+cont += "<th>ประเภท</th>";
+cont += "<th>ระดับ</th>";
+cont += "</tr>";
+for (let i in tourpoint.features) {
+    cont += "<tr id=" + tourpoint.features[i].properties.FID_1 + ">";
+    cont += "<td>" + tourpoint.features[i].properties.Name + "</td>";
+    cont += "<td>" + tourpoint.features[i].properties.Type + "</td>";
+    cont += "<td>" + tourpoint.features[i].properties.level + "</td>";
+    cont += "</tr>";
+}
+cont += "</table>";
+console.log(cont);
+document.getElementById("content").innerHTML = cont;
+
+//create polygon
+var polygonGeoJson = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#fbff00",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#fbff00",
+        "fill-opacity": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.34613037109375,
+              15.749962572748768
+            ],
+            [
+              101.34613037109375,
+              15.652130950388306
+            ],
+            [
+              101.31317138671875,
+              15.604520240514251
+            ],
+            [
+              101.29669189453125,
+              15.530437179771909
+            ],
+            [
+              101.2994384765625,
+              15.384839462641903
+            ],
+            [
+              101.195068359375,
+              15.321273934950508
+            ],
+            [
+              101.08245849609375,
+              15.35570766610093
+            ],
+            [
+              101.019287109375,
+              15.337167131558703
+            ],
+            [
+              100.9808349609375,
+              15.345113276544726
+            ],
+            [
+              100.975341796875,
+              15.41396718408176
+            ],
+            [
+              100.92315673828125,
+              15.435148417952398
+            ],
+            [
+              100.8819580078125,
+              15.530437179771909
+            ],
+            [
+              100.81329345703125,
+              15.559544421458103
+            ],
+            [
+              100.7501220703125,
+              15.519851708918106
+            ],
+            [
+              100.76934814453125,
+              15.47485740268724
+            ],
+            [
+              100.6732177734375,
+              15.451032924833779
+            ],
+            [
+              100.6292724609375,
+              15.339815880145375
+            ],
+            [
+              100.60455322265625,
+              15.260338834617146
+            ],
+            [
+              100.54412841796875,
+              15.196735527225155
+            ],
+            [
+              100.42327880859375,
+              15.072123545811683
+            ],
+            [
+              100.46173095703125,
+              15.029685756555674
+            ],
+            [
+              100.447998046875,
+              14.944784875088372
+            ],
+            [
+              100.4150390625,
+              14.920900442047646
+            ],
+            [
+              100.469970703125,
+              14.820025850795036
+            ],
+            [
+              100.469970703125,
+              14.721760679027714
+            ],
+            [
+              100.5029296875,
+              14.663311719931178
+            ],
+            [
+              100.62103271484375,
+              14.652682958143942
+            ],
+            [
+              100.67047119140624,
+              14.753635331540442
+            ],
+            [
+              100.78582763671875,
+              14.796127603627053
+            ],
+            [
+              100.8544921875,
+              14.790816524297828
+            ],
+            [
+              100.92315673828125,
+              14.769570907465978
+            ],
+            [
+              100.98358154296875,
+              14.743010965702727
+            ],
+            [
+              101.03851318359375,
+              14.79347208021435
+            ],
+            [
+              101.07147216796875,
+              14.764259178591587
+            ],
+            [
+              101.09344482421875,
+              14.902321826141808
+            ],
+            [
+              101.15936279296875,
+              14.90497601233392
+            ],
+            [
+              101.260986328125,
+              14.918246452293118
+            ],
+            [
+              101.3653564453125,
+              15.0456009179285
+            ],
+            [
+              101.392822265625,
+              15.069471431702283
+            ],
+            [
+              101.38458251953125,
+              15.25503929351312
+            ],
+            [
+              101.3763427734375,
+              15.5251445122553
+            ],
+            [
+              101.37908935546874,
+              15.615101354447171
+            ],
+            [
+              101.40655517578125,
+              15.744675578471627
+            ],
+            [
+              101.34613037109375,
+              15.749962572748768
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+
+var polygonLayer = L.geoJSON(polygonGeoJson, {
+style: function (feature) {
+return {fillcolor:'yellow',weight:2,
+        opacity:1,
+        color:'yellow', //outline color
+        fillOpacity:0.4};
+},
+onEachFeature: function (feature, layer) {
+layer.bindPopup(feature.properties.name);
+
+layer.on("mouseover", function () {
+layer.openPopup();
+});
+
+layer.on("mouseout", function () {
+layer.closePopup();
+});
+},
+});
+
+//group point + polygon layer
+var overlays = {
+  สถานที่ท่องเที่ยว : tourLayer,
+  ขอบเขตจังหวัดลพบุรี : polygonLayer
+};
+
+//Create layer control
+L.control.layers(baseMaps,overlays).addTo(map);
+
+</script>
+
+<h4><font face ="Peach Play">
+  <b>1.พระปรางค์สามยอด</b> เป็นโบราณสถานและแหล่งท่องเที่ยวทาง ประวัติศาสตร์และโบราณคดีที่สำคัญแห่งหนึ่งของจังหวัดลพบุรี ปราสาทศิลาแลงแบบเขมรเรียงต่อกัน 3 องค์ เชื่อมต่อกัน ลักษณะเป็นปราสาทเขมรในศิลปะบายน มีการประดับลวดลายปูนปั้นที่งดงาม
+  <br><b>2.พระนารายณ์ราชนิเวศน์</b> หรือ พิพิธภัณฑสถานแห่งชาติสมเด็จพระนารายณ์ เป็นพระราชวังที่สมเด็จพระนารายณ์มหาราชโปรดให้สร้างขึ้น เพื่อใช้เป็นที่ประทับ ล่าสัตว์ ออกว่าราชการ และต้อนรับแขกเมือง
+  <br><b>3.รถไฟลอยน้ำ เขื่อนป่าสักชลสิทธิ์</b>
+  <br><b>4.น้ำตกวังก้านเหลือง</b> ต้นน้ำมาจากตาน้ำขนาดใหญ่ที่ผุดขึ้นมาจากใต้ดินกลายเป็นธารน้ำตกน้ำที่ไหลเอ่อมาจากต้นน้ำทิ้งตัวลงไปปะทะกับหินปูน กลายเป็นน้ำตกกว้างกว่า 20 เมตรลดหลั่นกันไปหลายชั้น
+  <br><b>5.บ้านวิชาเยนทร์</b> หรือ บ้านหลวงรับราชทูต ถูกสร้างขึ้นเพื่อใช้เป็นสถานที่รองรับคณะทูตที่มาเข้าเฝ้า สมเด็จพระนารายณ์มหาราชยังเมืองลพบุรี คณะราชทูตจากประเทศฝรั่งเศสชุดแรก  ลักษณะของสถาปัตยกรรมบ้านหลวงรับราชทูตบางหลังเป็นยุโรปอย่างแท้จริง
+  <br><b>6.เขาวงพระจันทร์</b> มีทางบันไดไปสู่ยอดเขาประมาณ 3,799 ขั้นยอดเขานี้สูงจากระดับน้ำทะเลประมาณ 650 เมตร สถานที่นี้เป็นแหล่งสะสมวัตถุโบราณ ของหายากมากมาย และพระพิมพ์ต่างๆมากมาย
+  <br><b>7.ทุ่งทานตะวัน เขาจีนแล</b> มีพื้นที่กว้างใหญ่มาก กว่า 1400 ไร่ ด้านหลังสวยงามด้วยภูเขาเรียกว่า เขาจีนแลถือว่าเป็นทุ่งทานตะวันที่สวยที่สุดของจังหวัดลพบุรี
+  <br><b>8.จุดชมวิวเขาพระยาเดินธง</b> จุดชมวิวทะเลหมอกและพระอาทิตย์ขึ้นที่สวยงามมองไปเบื้องล่างคือความเขียวขจีของต้นไม้ และวิวของเขื่อนป่าสักชลสิทธิ์
+  <br><b>9.วัดถ้ำเขาปรางค์</b> สามารถเห็นพระพุทธรูปองค์ใหญ่เด่นสง่าอยู่ท่ามกลางภูเขามาแต่ไกลเลย เพราะเป็นพระพุทธรูปปางปฐมเทศนาที่มีขนาดใหญ่ที่สุดในประเทศไทย
+  <br><b>10.วัดเกริ่นกฐิน</b> ปัจจุบันเป็นที่พำนักของพระเกจิอาจารย์ชื่อดัง หลวงพ่อเพี้ยน อัคคธัมโม เป็นเจ้าอาวาสวัดได้ร่วมกับชาวบ้านพร้อมใจกันขนานนามพระพุทธรูปองค์นี้ว่า หลวงพ่อปาน เพื่อเป็นการระลึกถึงพระคุณของพระภิกษุชราชาวเขมร
+  <br><b>11.สวนสัตว์ลพบุรี</b> มีวัตถุประสงค์ให้เป็นที่อนุรักษ์สัตว์ป่าที่หายากของไทย ได้พยายามปรับปรุงพัฒนาพื้นที่ของกองทัพบกประมาณ  80 ไร่ ให้เป็นสวนสัตว์ และเป็นสถานที่พักผ่อนแห่งที่ 2 ของประเทศไทยรองลงมาจากสวนสัตว์ดุสิต(เขาดิน)
+</font>
+</h4>
+
+<h4><font face ="Peach Play">
+<center><b>อ้างอิง</b></center>
+<center>
+  https://www.paiduaykan.com/travel/ที่เที่ยวลพบุรี
+  <br>https://travel.trueid.net/detail/GLq2VjW41K5E
+  <br>https://sites.google.com/site/muaklekmaymay/wad-kerin-kthin-canghwad-lphburi
+  <br>https://www.lopburicity.com/สวนสัตว์ลพบุรีสวนสัตว์/
+</center>
+</font>
+</h4>
+
+</body>
+</html>
